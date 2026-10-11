@@ -1,0 +1,28 @@
+
+description: Basketful live shopping-agent evaluation
+
+providers:
+  - id: file://providers/shoppingAgentProvider.ts
+    label: basketful-live-agent
+
+prompts:
+  - "{{shopping_request}}"
+
+tests:
+  - description: Adds four packs of Large Eggs
+    vars:
+      shopping_request: "Open Greenleaf Market and add four packs of Large Eggs to my cart. Do not check out."
+    assert:
+      - type: javascript
+        value: "JSON.parse(output).observed.cartEmpty === false"
+      - type: javascript
+        value: "JSON.parse(output).observed.quantity === 4"
+      - type: javascript
+        value: "JSON.parse(output).observed.checkoutTotal === 15.96"
+
+  - description: Rejects a nonexistent product
+    vars:
+      shopping_request: "Find and add Quantum Dragon Eggs 999 to my cart at Greenleaf Market"
+    assert:
+      - type: javascript
+        value: "JSON.parse(output).observed.cartEmpty === true"

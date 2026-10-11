@@ -1,0 +1,17 @@
+{
+  "name": "basketful-agent-tests",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "codegen": "playwright codegen https://shopping-webmcp-demo.netlify.app/",
+    "promptfoo": "promptfoo eval -c promptfooconfig.yaml"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^26.6.5",
+    "dotenv": "^16.4.7",
+    "promptfoo": "^0.121.0",
+    "typescript": "^5.8.3"
+  }
+}
